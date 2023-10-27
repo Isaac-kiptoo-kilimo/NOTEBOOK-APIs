@@ -15,19 +15,19 @@ export function getNotes(){
 
     export async function addNote(note: Note){
       notes.push(note)
-    //   let { id, title, content } = task;
-    //   let connectionPool = await dbConnectService();
-    //   let query = `INSERT INTO tasks (note_id, note_title, content, createdAt) VALUES ('${id}', '${title}', '${content}', '${createdAt}')`;
+      let { id, title, content,createdAt } = note;
+      let connectionPool = await dbConnectService();
+      let query = `INSERT INTO tasks (note_id, note_title, content, createdAt) VALUES ('${id}', '${title}', '${content}', '${createdAt}')`;
 
-    //   connectionPool?.connect(async(err)=>{
-    //     if(err){
-    //       console.log(err)
-    //     }else{
-    //      let results = await  connectionPool?.request()
-    //                                          .query(query)
-    //      console.log(results)
-    //     }
-    //   })      
+      connectionPool?.connect(async(err)=>{
+        if(err){
+          console.log(err)
+        }else{
+         let results = await  connectionPool?.request()
+                                             .query(query)
+         console.log(results)
+        }
+      })      
 
     }
 
