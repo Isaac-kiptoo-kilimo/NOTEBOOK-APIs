@@ -17,7 +17,7 @@ export function getNotes(){
       notes.push(note)
       let { id, title, content,createdAt } = note;
       let connectionPool = await dbConnectService();
-      let query = `INSERT INTO tasks (note_id, note_title, content, createdAt) VALUES ('${id}', '${title}', '${content}', '${createdAt}')`;
+      let query = `INSERT INTO notes (note_id, note_title, content, createdAt) VALUES ('${id}', '${title}', '${content}', '${createdAt}')`;
 
       connectionPool?.connect(async(err)=>{
         if(err){
