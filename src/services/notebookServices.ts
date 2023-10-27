@@ -1,5 +1,6 @@
 import { notes } from "../data";;
 import { Note } from "../types/interfaces"
+import { formateDates } from "../utils/formatDates";
 import { dbConnectService } from "./dbConnectServices";
 import sql from 'mssql'
 
@@ -15,7 +16,11 @@ export function getNotes(){
 
     export async function addNote(note: Note){
       notes.push(note)
-      let { id, title, content,createdAt } = note;
+      let { id, title, content } = note;
+
+      const createdAt = formateDates()
+      // console.log(createdAt);
+      
       let connectionPool = await dbConnectService();
       let query = `INSERT INTO notes (note_id, note_title, content, createdAt) VALUES ('${id}', '${title}', '${content}', '${createdAt}')`;
 
