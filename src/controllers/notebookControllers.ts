@@ -5,9 +5,7 @@ import { addNote,
          updateNote,deleteNote, } from "../services/notebookServices";
 
 
-export function appTest(req:Request, res:Response){
-      return res.send("Test okay")
-}
+
 
 export function addNoteController(req: Request, res:Response){
     let new_note = req.body;
@@ -34,13 +32,13 @@ export function getSingleNoteController(req:Request, res:Response ){
       res.json(note)
 }
 
-export function updateNoteController(req:Request, res:Response){
+export async function updateNoteController(req:Request, res:Response){
     let { noteID } = req.params;
     let parsedID = parseInt(noteID)
     let updatedNote = req.body;
 
     let result = updateNote(parsedID, updatedNote);
-    if (result) {
+    if (await result) {
           return res.json({
                 id: parsedID,
                 success: true
