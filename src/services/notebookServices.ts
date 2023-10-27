@@ -4,6 +4,12 @@ import { formateDates } from "../utils/formatDates";
 import { dbConnectService } from "./dbConnectServices";
 import sql from 'mssql'
 
+
+function generateRandomID() {
+  const min = 10000000; 
+  const max = 99999999;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 export function getNotes(){
       return notes;
     }
@@ -16,10 +22,13 @@ export function getNotes(){
 
     export async function addNote(note: Note){
       notes.push(note)
-      let { id, title, content } = note;
+      const noteId = generateRandomID();
+      console.log(noteId) 
+      let new_noteID = noteId.toString();
+      let id=parseInt(new_noteID)
+      let { title, content } = note;
 
       const createdAt = formateDates()
-      // console.log(createdAt);
       
       let connectionPool = await dbConnectService();
       let query = `INSERT INTO notes (note_id, note_title, content, createdAt) VALUES ('${id}', '${title}', '${content}', '${createdAt}')`;
