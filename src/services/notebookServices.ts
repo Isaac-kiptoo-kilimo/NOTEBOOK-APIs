@@ -25,7 +25,7 @@ import { dbConnectService } from "./dbConnectServices";
             return [];
           }
         }
-        return [];
+        return null;
       }
        
  
@@ -52,7 +52,7 @@ import { dbConnectService } from "./dbConnectServices";
   
 
     export async function addNote(note: Note){
-      notes.push(note)
+      // notes.push(note)
       const noteId = generateRandomID();
       console.log(noteId) 
       let new_noteID = noteId.toString();
@@ -109,7 +109,7 @@ import { dbConnectService } from "./dbConnectServices";
           try{
             const request=ConnectionPool.request();
             await request.query(
-              `UPDATE notes SET note_title='${title}', content='${content}',WHERE note_id='${id}'`
+              `UPDATE notes SET note_title='${title}', content='${content}' WHERE note_id='${id}'`
             );
             return true;
           }catch(error){
@@ -124,4 +124,4 @@ import { dbConnectService } from "./dbConnectServices";
       }
     }
 
-   
+  
