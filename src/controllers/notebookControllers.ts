@@ -3,6 +3,7 @@ import { addNote,
         getNotes, 
          getSingleNote,  
          updateNote,deleteNote, } from "../services/notebookServices";
+import { new_query } from "../services/dbconnect";
 
 
 
@@ -18,10 +19,47 @@ export function addNoteController(req: Request, res:Response){
     })
 }
 
-export function getNotesController(req: Request, res:Response){
-      let notes = getNotes();
-      res.json(notes)
+export async function getNotesController(req: Request, res:Response){
+      
+      // let notes = await getNotes();
+
+      // console.log(notes);
+      const queryString = "select * from notes"
+
+      const result = await new_query(queryString)
+
+      res.json( result.recordset)
+      
+      
 }
+
+
+
+
+
+export const  getOneNote=async (req:Request,res:Response)=>{
+      try{
+
+            const {userID}=req.params;
+            console.log(userID);
+            
+            const queryString=`SELECT * FROM notes WHERE note_id='${userID}'`
+            const result=await new_query(queryString)
+            // console.log(result.recordset);
+            
+
+            res.json(result.recordset[0])
+
+      }catch(err){
+            console.log(err)
+
+      }
+
+
+
+
+}
+
 
 
 export function getSingleNoteController(req:Request, res:Response ){

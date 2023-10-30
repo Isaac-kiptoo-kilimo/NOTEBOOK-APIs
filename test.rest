@@ -1,0 +1,12 @@
+GET http://localhost:3000/notes/notes
+
+
+####
+POST http://localhost:3000/notes
+Content-Type: application/json
+
+{
+    "note_title" : "riding",
+    "content": "Coding for 3hrs a day and pushing to github"
+
+}
